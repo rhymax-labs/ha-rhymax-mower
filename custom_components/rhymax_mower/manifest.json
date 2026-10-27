@@ -1,0 +1,11 @@
+{
+  "domain": "rhymax_mower",
+  "name": "Rhymax Mower",
+  "codeowners": ["@rhymax-labs"],
+  "config_flow": true,
+  "documentation": "https://github.com/rhymax-labs/ha-rhymax-mower",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/rhymax-labs/ha-rhymax-mower/issues",
+  "requirements": [],
+  "version": "0.0.1"
+}
