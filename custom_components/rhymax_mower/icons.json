@@ -1,0 +1,9 @@
+{
+  "entity": {
+    "sensor": {
+      "mowing_progress": {
+        "default": "mdi:progress-check"
+      }
+    }
+  }
+}

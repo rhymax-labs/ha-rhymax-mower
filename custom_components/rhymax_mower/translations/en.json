@@ -1,0 +1,93 @@
+{
+  "application_credentials": {
+    "description": "Rhymax Mower signs in to your RoboUP account through Rhymax cloud. Enter the credentials that Rhymax provides for Home Assistant linking:\n\n- **OAuth client ID**: `{client_id}`\n- **OAuth client secret**: the client secret from Rhymax\n\nAfter you sign in, Rhymax cloud returns you to Home Assistant through My Home Assistant (`{redirect_url}`). [Learn more]({more_info_url})"
+  },
+  "config": {
+    "step": {
+      "pick_implementation": {
+        "title": "Choose Application Credentials",
+        "data": {
+          "implementation": "Application Credentials"
+        },
+        "data_description": {
+          "implementation": "The credentials used to sign in to your RoboUP account."
+        }
+      },
+      "auth": {
+        "title": "Sign in to RoboUP",
+        "description": "Sign in with your RoboUP account on the page that opens. Once you allow access, you return to Home Assistant."
+      },
+      "reauth_confirm": {
+        "title": "Sign in to RoboUP again",
+        "description": "The link between Home Assistant and your RoboUP account has expired. Sign in again to keep controlling your mowers."
+      }
+    },
+    "abort": {
+      "already_configured": "This RoboUP account is already linked.",
+      "reauth_successful": "Your RoboUP account is linked again.",
+      "wrong_account": "You signed in with a different RoboUP account. Sign in with the account that was linked before.",
+      "link_rejected": "Rhymax cloud did not accept the Application Credentials. Check that the client ID is `homeassistant` and that the client secret is correct. If both are correct, Home Assistant linking is not available yet.",
+      "linking_unavailable": "Home Assistant linking is not available yet. Please try again later.",
+      "invalid_auth": "Rhymax cloud did not accept the sign-in. Please try again.",
+      "cannot_connect": "Could not connect to Rhymax cloud. Please try again later.",
+      "authorize_url_timeout": "Timed out while preparing the sign-in page.",
+      "missing_configuration": "Rhymax Mower is not set up correctly. Please follow the documentation.",
+      "missing_credentials": "Rhymax Mower needs Application Credentials. Please follow the documentation.",
+      "no_url_available": "No URL available. For information about this error, [check the help section]({docs_url}).",
+      "oauth_error": "Rhymax cloud returned invalid sign-in data.",
+      "oauth_failed": "Could not complete sign-in with Rhymax cloud. Please try again later.",
+      "oauth_implementation_unavailable": "No Application Credentials are available right now. Please try again later.",
+      "oauth_timeout": "Timed out while completing sign-in with Rhymax cloud.",
+      "oauth_unauthorized": "Rhymax cloud did not accept the sign-in.",
+      "user_rejected_authorize": "Account linking was not completed: {error}"
+    }
+  },
+  "entity": {
+    "sensor": {
+      "mowing_progress": {
+        "name": "Mowing progress"
+      }
+    }
+  },
+  "exceptions": {
+    "auth_failed": {
+      "message": "The link to your RoboUP account has expired. Sign in again to continue."
+    },
+    "credentials_missing": {
+      "message": "The Application Credentials of this entry are missing. Sign in again to continue."
+    },
+    "relink_required": {
+      "message": "This entry is not linked to a RoboUP account. Delete it and add Rhymax Mower again."
+    },
+    "linking_unavailable": {
+      "message": "Home Assistant linking is not available yet. Please try again later."
+    },
+    "update_failed": {
+      "message": "Could not get the mower status from Rhymax cloud: {error}"
+    },
+    "cannot_connect": {
+      "message": "Could not connect to Rhymax cloud. Please try again later."
+    },
+    "command_failed": {
+      "message": "Rhymax cloud could not send the command. Please try again later."
+    },
+    "command_rejected": {
+      "message": "The mower could not carry out the command."
+    },
+    "mower_offline": {
+      "message": "The mower is offline."
+    },
+    "mower_busy": {
+      "message": "The mower is busy with another command. Please try again in a moment."
+    },
+    "mower_timeout": {
+      "message": "The mower did not respond in time. It may still carry out the command, so check its status before trying again."
+    },
+    "mower_not_found": {
+      "message": "This mower is no longer on your RoboUP account."
+    },
+    "region_restricted": {
+      "message": "Cloud control is not available for this mower in its current region."
+    }
+  }
+}
