@@ -125,7 +125,7 @@ class RhymaxLawnMower(RhymaxEntity, LawnMowerEntity):
         try:
             await self.coordinator.api.async_send_command(self.mower_id, command)
         except RhymaxAuthError as err:
-            self.coordinator.config_entry.async_start_reauth(self.hass)
+            self.coordinator.async_auth_failed(err)
             raise HomeAssistantError(
                 translation_domain=DOMAIN, translation_key="auth_failed"
             ) from err
@@ -133,4 +133,4 @@ class RhymaxLawnMower(RhymaxEntity, LawnMowerEntity):
             raise HomeAssistantError(
                 translation_domain=DOMAIN, translation_key=_command_error_key(err)
             ) from err
-        await self.coordinator.async_request_refresh()
+        await self.coordinator.async_confirm_command(self.mower_id, command)

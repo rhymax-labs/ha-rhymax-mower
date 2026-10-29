@@ -70,7 +70,11 @@ Each mower is a device with these entities:
 | Charging | Whether the mower is charging |
 | Connectivity | Whether the mower is online (diagnostic) |
 
-The status is refreshed every 30 seconds and right after you send a command. While a mower is offline, its controls and readings are unavailable and Connectivity shows it as disconnected.
+This branch adds cloud WebSocket updates alongside permanent REST reconciliation. While push is connected, an independent watchdog checks every mower and reconciles a quiet mower after 90 seconds by default. If push is unavailable, REST checks continue at roughly 30-second intervals. These are fallback defaults, not delivery guarantees. A quiet connection never makes a mower offline: Connectivity follows the cloud's reported `online` value.
+
+Commands are confirmed through subsequent state updates, with up to three REST confirmation reads within 30 seconds using the same request budget as the watchdog. A successful command response means it was accepted; it does not guarantee that the mower has completed it. While a mower is reported offline, its controls and readings are unavailable and Connectivity shows it as disconnected.
+
+The push implementation is experimental on this local branch. Cloud WebSocket acceptance testing is required before merging or distributing the behavior change. See [implementation and testing notes](docs/ha-scoped-ws.md).
 
 ### Lawn mower activity
 
@@ -94,13 +98,13 @@ The status is refreshed every 30 seconds and right after you send a command. Whi
 | Mowers shared with you by another account | No (only mowers your account owns) |
 | Local (LAN) control | No |
 | Mowing schedule editing | No |
-| Instant status updates | No (the status is polled from the cloud every 30 seconds) |
+| Cloud status updates | WebSocket push with REST fallback; requires the HA-scoped cloud endpoint |
 
 ## Removing the integration
 
 Deleting the integration also unlinks Home Assistant from your RoboUP account. Afterwards you can delete the Application Credentials as well.
 
-A mower that you remove from your RoboUP account shows as unavailable in Home Assistant. You can then delete it from its device page.
+A mower removed from your RoboUP account is removed from this integration's entities at the next device-list reconciliation. Reloading the integration closes its local connection without disconnecting the account.
 
 ## Troubleshooting
 
@@ -108,7 +112,7 @@ A mower that you remove from your RoboUP account shows as unavailable in Home As
 - **"Rhymax cloud did not accept the Application Credentials"**: check that the client ID is exactly `homeassistant` and that the client secret is correct (**Settings → Devices & services → ⋮ → Application credentials**). If both are correct, Home Assistant linking is not available yet.
 - **The sign-in page does not return to your Home Assistant**: My Home Assistant points to a different address. Update your Home Assistant address at [my.home-assistant.io](https://my.home-assistant.io/) and try again.
 - **Home Assistant asks you to sign in to RoboUP again**: the link to your RoboUP account expired or was removed. Open the notification in **Settings → Devices & services** and sign in with the same RoboUP account.
-- **A mower is missing**: only mowers that your account owns are added. A mower you just added in the RoboUP app appears within a minute.
+- **A mower is missing**: only mowers that your account owns are added. New mowers appear after the next successful device-list reconciliation (normally checked every 60 seconds).
 
 ## Privacy
 

@@ -7,7 +7,6 @@ import logging
 import time
 
 from aiohttp import ClientError
-
 from homeassistant.const import Platform
 from homeassistant.core import HomeAssistant
 from homeassistant.exceptions import (
@@ -15,7 +14,8 @@ from homeassistant.exceptions import (
     ConfigEntryError,
     HomeAssistantError,
 )
-from homeassistant.helpers import config_entry_oauth2_flow, device_registry as dr
+from homeassistant.helpers import config_entry_oauth2_flow
+from homeassistant.helpers import device_registry as dr
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
 
 from .api import ConfigEntryAuth, RhymaxCloudApi, RhymaxError, StaticTokenAuth
@@ -53,20 +53,31 @@ async def async_setup_entry(hass: HomeAssistant, entry: RhymaxConfigEntry) -> bo
     oauth_session = config_entry_oauth2_flow.OAuth2Session(hass, entry, implementation)
     api = RhymaxCloudApi(async_get_clientsession(hass), ConfigEntryAuth(oauth_session))
     coordinator = RhymaxCoordinator(hass, entry, api)
-    await coordinator.async_config_entry_first_refresh()
-    entry.runtime_data = coordinator
-
-    await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
+    try:
+        await coordinator.async_config_entry_first_refresh()
+        entry.runtime_data = coordinator
+        await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
+        await coordinator.async_start()
+    except BaseException:
+        await coordinator.async_shutdown()
+        raise
     return True
 
 
 async def async_unload_entry(hass: HomeAssistant, entry: RhymaxConfigEntry) -> bool:
     """Unload a config entry."""
-    return await hass.config_entries.async_unload_platforms(entry, PLATFORMS)
+    if not await hass.config_entries.async_unload_platforms(entry, PLATFORMS):
+        return False
+    # A reload must retain OAuth credentials and other HA instances' links.
+    # Account-wide token revocation belongs to async_remove_entry below.
+    await entry.runtime_data.async_shutdown()
+    return True
 
 
 async def async_remove_entry(hass: HomeAssistant, entry: RhymaxConfigEntry) -> None:
     """Unlink Home Assistant from the RoboUP account when the entry is deleted."""
+    if (coordinator := getattr(entry, "runtime_data", None)) is not None:
+        await coordinator.async_shutdown()
     if not (token := entry.data.get("token")):
         return
     try:
