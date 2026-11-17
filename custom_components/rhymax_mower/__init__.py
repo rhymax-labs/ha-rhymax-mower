@@ -21,6 +21,7 @@ from homeassistant.helpers.aiohttp_client import async_get_clientsession
 from .api import ConfigEntryAuth, RhymaxCloudApi, RhymaxError, StaticTokenAuth
 from .const import DOMAIN
 from .coordinator import RhymaxConfigEntry, RhymaxCoordinator
+from .oauth import async_ensure_oauth_implementation
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -38,6 +39,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: RhymaxConfigEntry) -> bo
         raise ConfigEntryError(
             translation_domain=DOMAIN, translation_key="relink_required"
         )
+    await async_ensure_oauth_implementation(hass)
     try:
         implementation = (
             await config_entry_oauth2_flow.async_get_config_entry_implementation(
@@ -45,7 +47,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: RhymaxConfigEntry) -> bo
             )
         )
     except ValueError as err:
-        # The Application Credentials of this entry no longer exist.
+        # Legacy application credentials no longer exist; prompt one-click re-auth.
         raise ConfigEntryAuthFailed(
             translation_domain=DOMAIN, translation_key="credentials_missing"
         ) from err
@@ -80,6 +82,7 @@ async def async_remove_entry(hass: HomeAssistant, entry: RhymaxConfigEntry) -> N
         await coordinator.async_shutdown()
     if not (token := entry.data.get("token")):
         return
+    await async_ensure_oauth_implementation(hass)
     try:
         implementation = (
             await config_entry_oauth2_flow.async_get_config_entry_implementation(

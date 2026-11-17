@@ -1,16 +1,13 @@
 {
-  "application_credentials": {
-    "description": "Rhymax Mower signs in to your RoboUP account through Rhymax cloud. Enter the credentials that Rhymax provides for Home Assistant linking:\n\n- **OAuth client ID**: `{client_id}`\n- **OAuth client secret**: the client secret from Rhymax\n\nAfter you sign in, Rhymax cloud returns you to Home Assistant through My Home Assistant (`{redirect_url}`). [Learn more]({more_info_url})"
-  },
   "config": {
     "step": {
       "pick_implementation": {
-        "title": "Choose Application Credentials",
+        "title": "Choose Sign-in Method",
         "data": {
-          "implementation": "Application Credentials"
+          "implementation": "Sign-in Method"
         },
         "data_description": {
-          "implementation": "The credentials used to sign in to your RoboUP account."
+          "implementation": "The Rhymax cloud connection used to sign in to your RoboUP account."
         }
       },
       "auth": {
@@ -26,17 +23,17 @@
       "already_configured": "This RoboUP account is already linked.",
       "reauth_successful": "Your RoboUP account is linked again.",
       "wrong_account": "You signed in with a different RoboUP account. Sign in with the account that was linked before.",
-      "link_rejected": "Rhymax cloud did not accept the Application Credentials. Check that the client ID is `homeassistant` and that the client secret is correct. If both are correct, Home Assistant linking is not available yet.",
+      "link_rejected": "Rhymax cloud did not accept the account link. Home Assistant linking may not be enabled yet; please try again later.",
       "linking_unavailable": "Home Assistant linking is not available yet. Please try again later.",
       "invalid_auth": "Rhymax cloud did not accept the sign-in. Please try again.",
       "cannot_connect": "Could not connect to Rhymax cloud. Please try again later.",
       "authorize_url_timeout": "Timed out while preparing the sign-in page.",
-      "missing_configuration": "Rhymax Mower is not set up correctly. Please follow the documentation.",
-      "missing_credentials": "Rhymax Mower needs Application Credentials. Please follow the documentation.",
+      "missing_configuration": "Rhymax Mower is not set up correctly. Please check your Home Assistant My integration configuration.",
+      "missing_credentials": "Account linking configuration is unavailable. Please update Rhymax Mower and try again.",
       "no_url_available": "No URL available. For information about this error, [check the help section]({docs_url}).",
       "oauth_error": "Rhymax cloud returned invalid sign-in data.",
       "oauth_failed": "Could not complete sign-in with Rhymax cloud. Please try again later.",
-      "oauth_implementation_unavailable": "No Application Credentials are available right now. Please try again later.",
+      "oauth_implementation_unavailable": "Sign-in is temporarily unavailable. Please try again later.",
       "oauth_timeout": "Timed out while completing sign-in with Rhymax cloud.",
       "oauth_unauthorized": "Rhymax cloud did not accept the sign-in.",
       "user_rejected_authorize": "Account linking was not completed: {error}"
@@ -54,7 +51,7 @@
       "message": "The link to your RoboUP account has expired. Sign in again to continue."
     },
     "credentials_missing": {
-      "message": "The Application Credentials of this entry are missing. Sign in again to continue."
+      "message": "The link to your RoboUP account needs to be renewed. Sign in again to continue."
     },
     "relink_required": {
       "message": "This entry is not linked to a RoboUP account. Delete it and add Rhymax Mower again."

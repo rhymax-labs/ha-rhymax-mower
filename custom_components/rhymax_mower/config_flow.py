@@ -19,6 +19,7 @@ from .api import (
     StaticTokenAuth,
 )
 from .const import DOMAIN, OAUTH2_SCOPE
+from .oauth import async_ensure_oauth_implementation
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -40,6 +41,28 @@ class OAuth2FlowHandler(
     def extra_authorize_data(self) -> dict[str, Any]:
         """Request the smart home scope."""
         return {"scope": OAUTH2_SCOPE}
+
+    async def async_step_user(
+        self, user_input: dict[str, Any] | None = None
+    ) -> ConfigFlowResult:
+        """Start account linking directly with the built-in PKCE implementation."""
+        await async_ensure_oauth_implementation(self.hass)
+        if user_input is None:
+            implementations = (
+                await config_entry_oauth2_flow.async_get_implementations(
+                    self.hass, DOMAIN
+                )
+            )
+            if (
+                len(implementations) == 1
+                and isinstance(
+                    impl := implementations.get(DOMAIN),
+                    config_entry_oauth2_flow.LocalOAuth2ImplementationWithPkce,
+                )
+            ):
+                impl.code_verifier = impl.generate_code_verifier()
+                return await super().async_step_user({"implementation": DOMAIN})
+        return await super().async_step_user(user_input)
 
     async def async_step_creation(
         self, user_input: dict[str, Any] | None = None
