@@ -41,6 +41,14 @@ jobs:
               '## Install' \
               'HACS → custom repository `rhymax-labs/ha-rhymax-mower`, or update if already installed.')"
             gh release create "$TAG" --title "$TAG" --notes "$NOTES" --latest
+          elif [ "$TAG" = "v0.3.1" ]; then
+            NOTES="$(printf '%s\n' \
+              "## What's new" \
+              '- Unify integration UI, config entry title, translations, and documentation under RHYMAX / RHYMAX Cloud branding' \
+              '' \
+              '## Install' \
+              'HACS → custom repository `rhymax-labs/ha-rhymax-mower`, or update if already installed.')"
+            gh release create "$TAG" --title "$TAG" --notes "$NOTES" --latest
           else
             gh release create "$TAG" --title "$TAG" --generate-notes --latest
           fi

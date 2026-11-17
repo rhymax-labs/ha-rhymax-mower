@@ -7,35 +7,35 @@
           "implementation": "Sign-in Method"
         },
         "data_description": {
-          "implementation": "The Rhymax cloud connection used to sign in to your RoboUP account."
+          "implementation": "The RHYMAX Cloud connection used to sign in to your RHYMAX account."
         }
       },
       "auth": {
-        "title": "Sign in to RoboUP",
-        "description": "Sign in with your RoboUP account on the page that opens. Once you allow access, you return to Home Assistant."
+        "title": "Sign in to RHYMAX",
+        "description": "Sign in with your RHYMAX account on the page that opens. Once you allow access, you return to Home Assistant."
       },
       "reauth_confirm": {
-        "title": "Sign in to RoboUP again",
-        "description": "The link between Home Assistant and your RoboUP account has expired. Sign in again to keep controlling your mowers."
+        "title": "Sign in to RHYMAX again",
+        "description": "The link between Home Assistant and your RHYMAX account has expired. Sign in again to keep controlling your mowers."
       }
     },
     "abort": {
-      "already_configured": "This RoboUP account is already linked.",
-      "reauth_successful": "Your RoboUP account is linked again.",
-      "wrong_account": "You signed in with a different RoboUP account. Sign in with the account that was linked before.",
-      "link_rejected": "Rhymax cloud did not accept the account link. Home Assistant linking may not be enabled yet; please try again later.",
+      "already_configured": "This RHYMAX account is already linked.",
+      "reauth_successful": "Your RHYMAX account is linked again.",
+      "wrong_account": "You signed in with a different RHYMAX account. Sign in with the account that was linked before.",
+      "link_rejected": "RHYMAX Cloud did not accept the account link. Home Assistant linking may not be enabled yet; please try again later.",
       "linking_unavailable": "Home Assistant linking is not available yet. Please try again later.",
-      "invalid_auth": "Rhymax cloud did not accept the sign-in. Please try again.",
-      "cannot_connect": "Could not connect to Rhymax cloud. Please try again later.",
+      "invalid_auth": "RHYMAX Cloud did not accept the sign-in. Please try again.",
+      "cannot_connect": "Could not connect to RHYMAX Cloud. Please try again later.",
       "authorize_url_timeout": "Timed out while preparing the sign-in page.",
       "missing_configuration": "Rhymax Mower is not set up correctly. Please check your Home Assistant My integration configuration.",
       "missing_credentials": "Account linking configuration is unavailable. Please update Rhymax Mower and try again.",
       "no_url_available": "No URL available. For information about this error, [check the help section]({docs_url}).",
-      "oauth_error": "Rhymax cloud returned invalid sign-in data.",
-      "oauth_failed": "Could not complete sign-in with Rhymax cloud. Please try again later.",
+      "oauth_error": "RHYMAX Cloud returned invalid sign-in data.",
+      "oauth_failed": "Could not complete sign-in with RHYMAX Cloud. Please try again later.",
       "oauth_implementation_unavailable": "Sign-in is temporarily unavailable. Please try again later.",
-      "oauth_timeout": "Timed out while completing sign-in with Rhymax cloud.",
-      "oauth_unauthorized": "Rhymax cloud did not accept the sign-in.",
+      "oauth_timeout": "Timed out while completing sign-in with RHYMAX Cloud.",
+      "oauth_unauthorized": "RHYMAX Cloud did not accept the sign-in.",
       "user_rejected_authorize": "Account linking was not completed: {error}"
     }
   },
@@ -48,25 +48,25 @@
   },
   "exceptions": {
     "auth_failed": {
-      "message": "The link to your RoboUP account has expired. Sign in again to continue."
+      "message": "The link to your RHYMAX account has expired. Sign in again to continue."
     },
     "credentials_missing": {
-      "message": "The link to your RoboUP account needs to be renewed. Sign in again to continue."
+      "message": "The link to your RHYMAX account needs to be renewed. Sign in again to continue."
     },
     "relink_required": {
-      "message": "This entry is not linked to a RoboUP account. Delete it and add Rhymax Mower again."
+      "message": "This entry is not linked to a RHYMAX account. Delete it and add Rhymax Mower again."
     },
     "linking_unavailable": {
       "message": "Home Assistant linking is not available yet. Please try again later."
     },
     "update_failed": {
-      "message": "Could not get the mower status from Rhymax cloud: {error}"
+      "message": "Could not get the mower status from RHYMAX Cloud: {error}"
     },
     "cannot_connect": {
-      "message": "Could not connect to Rhymax cloud. Please try again later."
+      "message": "Could not connect to RHYMAX Cloud. Please try again later."
     },
     "command_failed": {
-      "message": "Rhymax cloud could not send the command. Please try again later."
+      "message": "RHYMAX Cloud could not send the command. Please try again later."
     },
     "command_rejected": {
       "message": "The mower could not carry out the command."
@@ -81,7 +81,7 @@
       "message": "The mower did not respond in time. It may still carry out the command, so check its status before trying again."
     },
     "mower_not_found": {
-      "message": "This mower is no longer on your RoboUP account."
+      "message": "This mower is no longer on your RHYMAX account."
     },
     "region_restricted": {
       "message": "Cloud control is not available for this mower in its current region."

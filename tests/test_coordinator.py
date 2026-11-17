@@ -220,7 +220,7 @@ async def test_inventory_reconciles_while_mowers_keep_pushing(
     hass, timed_coordinator, mock_api, make_state, devices, clock
 ):
     """Independent REST list reconciliation discovers an added and removed mower."""
-    new_device = RhymaxDevice(MOWER_C, "Side Yard", "RoboUP", "X9", "x9")
+    new_device = RhymaxDevice(MOWER_C, "Side Yard", "RHYMAX", "X9", "x9")
     mock_api.async_get_account.return_value = RhymaxAccount(
         "owner-account", [devices[0], new_device]
     )

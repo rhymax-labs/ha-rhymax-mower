@@ -66,7 +66,7 @@ def entry(hass: HomeAssistant) -> MockConfigEntry:
     """An authorized OAuth entry registered with Home Assistant."""
     config_entry = MockConfigEntry(
         domain=DOMAIN,
-        title="RoboUP",
+        title="RHYMAX account",
         unique_id="owner-account",
         data={
             "auth_implementation": DOMAIN,
@@ -87,8 +87,8 @@ def entry(hass: HomeAssistant) -> MockConfigEntry:
 def devices() -> list[RhymaxDevice]:
     """Two independent owner mowers on one account."""
     return [
-        RhymaxDevice(MOWER_A, "Front Yard", "RoboUP", "X9", "x9"),
-        RhymaxDevice(MOWER_B, "Back Yard", "RoboUP", "X9", "x9"),
+        RhymaxDevice(MOWER_A, "Front Yard", "RHYMAX", "X9", "x9"),
+        RhymaxDevice(MOWER_B, "Back Yard", "RHYMAX", "X9", "x9"),
     ]
 
 

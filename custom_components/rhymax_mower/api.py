@@ -350,7 +350,7 @@ def parse_device(item: Any) -> RhymaxDevice:
     return RhymaxDevice(
         id=mower_id,
         name=_str_or_none(item.get("name")) or f"Mower {mower_id[-4:].upper()}",
-        manufacturer=_str_or_none(item.get("manufacturer")) or "RoboUP",
+        manufacturer=_str_or_none(item.get("manufacturer")) or "RHYMAX",
         model=_str_or_none(item.get("model")) or None,
         product=_str_or_none(item.get("product")) or None,
     )

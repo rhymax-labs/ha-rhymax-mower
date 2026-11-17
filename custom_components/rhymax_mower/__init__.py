@@ -77,7 +77,7 @@ async def async_unload_entry(hass: HomeAssistant, entry: RhymaxConfigEntry) -> b
 
 
 async def async_remove_entry(hass: HomeAssistant, entry: RhymaxConfigEntry) -> None:
-    """Unlink Home Assistant from the RoboUP account when the entry is deleted."""
+    """Unlink Home Assistant from the RHYMAX account when the entry is deleted."""
     if (coordinator := getattr(entry, "runtime_data", None)) is not None:
         await coordinator.async_shutdown()
     if not (token := entry.data.get("token")):
@@ -90,7 +90,7 @@ async def async_remove_entry(hass: HomeAssistant, entry: RhymaxConfigEntry) -> N
             )
         )
     except (ValueError, HomeAssistantError) as err:
-        _LOGGER.warning("Could not unlink Home Assistant from RoboUP account: %s", err)
+        _LOGGER.warning("Could not unlink Home Assistant from RHYMAX account: %s", err)
         return
 
     try:
@@ -104,7 +104,7 @@ async def async_remove_entry(hass: HomeAssistant, entry: RhymaxConfigEntry) -> N
             )
             await api.async_disconnect()
     except (ClientError, TimeoutError, RhymaxError) as err:
-        _LOGGER.warning("Could not unlink Home Assistant from RoboUP account: %s", err)
+        _LOGGER.warning("Could not unlink Home Assistant from RHYMAX account: %s", err)
 
 
 async def async_remove_config_entry_device(

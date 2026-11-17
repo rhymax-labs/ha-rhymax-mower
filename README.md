@@ -1,13 +1,13 @@
 # Rhymax Mower for Home Assistant
 
-Control your Rhymax / RoboUP robotic mowers from Home Assistant. The integration links your RoboUP account using OAuth2 with PKCE and talks directly to the RoboUP cloud—no client secret or manual credential entry required.
+Control your RHYMAX robotic mowers from Home Assistant. The integration links your RHYMAX account using OAuth2 with PKCE and talks directly to the RHYMAX Cloud—no client secret or manual credential entry required.
 
-Powered by Rhymax Cloud.
+Powered by RHYMAX Cloud.
 
 ## Requirements
 
 - Home Assistant 2025.4 or newer.
-- A RoboUP account (the one you use in the RoboUP app) that owns at least one mower. Mowers shared with you by another account are not listed.
+- A RHYMAX account (the one you use in the RHYMAX App) that owns at least one mower. Mowers shared with you by another account are not listed.
 
 ## Installation
 
@@ -15,7 +15,7 @@ Powered by Rhymax Cloud.
 
 [![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=rhymax-labs&repository=ha-rhymax-mower&category=integration)
 
-Or tap **Open in HACS** inside the RoboUP / Rhymax App (**Settings → Smart Home / Voice Control → Home Assistant**), then select **Download** and restart Home Assistant.
+Or tap **Open in HACS** inside the RHYMAX App (**Settings → Smart Home / Voice Control → Home Assistant**), then select **Download** and restart Home Assistant.
 
 ### Manual HACS custom repository
 
@@ -33,13 +33,13 @@ Copy the `custom_components/rhymax_mower` folder into the `custom_components` fo
 
 [![Open your Home Assistant instance and start setting up a new integration.](https://my.home-assistant.io/badges/config_flow_start.svg)](https://my.home-assistant.io/redirect/config_flow_start/?domain=rhymax_mower)
 
-1. Go to **Settings → Devices & services → Add integration** and choose **Rhymax Mower** (or tap **Add Integration in Home Assistant** in the RoboUP App).
-2. A RoboUP sign-in page opens automatically—no Application Credentials or client secret needed. Sign in the same way you do in the RoboUP app (email and password, or Google) to allow Home Assistant access.
+1. Go to **Settings → Devices & services → Add integration** and choose **Rhymax Mower** (or tap **Add Integration in Home Assistant** in the RHYMAX App).
+2. A RHYMAX sign-in page opens automatically—no Application Credentials or client secret needed. Sign in the same way you do in the RHYMAX App (email and password, or Google) to allow Home Assistant access.
 3. You return to Home Assistant, and every mower on your account is added as a device.
 
 ### Redirect URL
 
-After you sign in, the RoboUP cloud returns you to Home Assistant through [My Home Assistant](https://my.home-assistant.io/):
+After you sign in, RHYMAX Cloud returns you to Home Assistant through [My Home Assistant](https://my.home-assistant.io/):
 
 ```text
 https://my.home-assistant.io/redirect/oauth
@@ -85,26 +85,26 @@ See [implementation and testing notes](docs/ha-scoped-ws.md).
 | Battery level, charging, mowing progress | Yes |
 | Zone mowing | No (not available) |
 | Mowers shared with you by another account | No (only mowers your account owns) |
-| Local (LAN) control | No (legacy local MQTT remains in RoboUP App → Home Assistant → Advanced) |
+| Local (LAN) control | No (legacy local MQTT remains in RHYMAX App → Home Assistant → Advanced) |
 | Mowing schedule editing | No |
 | Cloud status updates | WebSocket push with REST fallback; requires the HA-scoped cloud endpoint |
 
 ## Removing the integration
 
-Deleting the integration also unlinks Home Assistant from your RoboUP account.
+Deleting the integration also unlinks Home Assistant from your RHYMAX account.
 
-A mower removed from your RoboUP account is removed from this integration's entities at the next device-list reconciliation. Reloading the integration closes its local connection without disconnecting the account.
+A mower removed from your RHYMAX account is removed from this integration's entities at the next device-list reconciliation. Reloading the integration closes its local connection without disconnecting the account.
 
 ## Troubleshooting
 
-- **"Home Assistant linking is not available yet"**: linking Home Assistant to the RoboUP cloud is not available yet. Please try again later.
+- **"Home Assistant linking is not available yet"**: linking Home Assistant to RHYMAX Cloud is not available yet. Please try again later.
 - **The sign-in page does not return to your Home Assistant**: My Home Assistant points to a different address. Update your Home Assistant address at [my.home-assistant.io](https://my.home-assistant.io/) and try again.
-- **Home Assistant asks you to sign in to RoboUP again**: the link to your RoboUP account expired or was removed. Open the notification in **Settings → Devices & services** and sign in with the same RoboUP account.
+- **Home Assistant asks you to sign in to RHYMAX again**: the link to your RHYMAX account expired or was removed. Open the notification in **Settings → Devices & services** and sign in with the same RHYMAX account.
 - **A mower is missing**: only mowers that your account owns are added. New mowers appear after the next successful device-list reconciliation (normally checked every 60 seconds).
 
 ## Privacy
 
-The integration only talks to the RoboUP cloud. Home Assistant can read your mower list and mower status, and send the commands listed above. The sign-in page shows what is shared with Home Assistant.
+The integration only talks to RHYMAX Cloud. Home Assistant can read your mower list and mower status, and send the commands listed above. The sign-in page shows what is shared with Home Assistant.
 
 ## License
 

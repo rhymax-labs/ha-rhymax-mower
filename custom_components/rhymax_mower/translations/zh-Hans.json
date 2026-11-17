@@ -7,35 +7,35 @@
           "implementation": "登录方式"
         },
         "data_description": {
-          "implementation": "用于登录 RoboUP 账号的 Rhymax 云端连接。"
+          "implementation": "用于登录 RHYMAX 账号的 RHYMAX 云端连接。"
         }
       },
       "auth": {
-        "title": "登录 RoboUP",
-        "description": "在打开的页面中登录您的 RoboUP 账号，授权后将自动返回 Home Assistant。"
+        "title": "登录 RHYMAX",
+        "description": "在打开的页面中登录您的 RHYMAX 账号，授权后将自动返回 Home Assistant。"
       },
       "reauth_confirm": {
-        "title": "重新登录 RoboUP",
-        "description": "Home Assistant 与您 RoboUP 账号的连接已过期，请重新登录以继续控制割草机。"
+        "title": "重新登录 RHYMAX",
+        "description": "Home Assistant 与您 RHYMAX 账号的连接已过期，请重新登录以继续控制割草机。"
       }
     },
     "abort": {
-      "already_configured": "此 RoboUP 账号已绑定。",
-      "reauth_successful": "已重新绑定您的 RoboUP 账号。",
-      "wrong_account": "您登录了不同的 RoboUP 账号，请使用此前绑定的账号重新登录。",
-      "link_rejected": "Rhymax 云端未接受账号绑定，Home Assistant 接入可能尚未开启，请稍后重试。",
+      "already_configured": "此 RHYMAX 账号已绑定。",
+      "reauth_successful": "已重新绑定您的 RHYMAX 账号。",
+      "wrong_account": "您登录了不同的 RHYMAX 账号，请使用此前绑定的账号重新登录。",
+      "link_rejected": "RHYMAX 云端未接受账号绑定，Home Assistant 接入可能尚未开启，请稍后重试。",
       "linking_unavailable": "Home Assistant 接入暂未开启，请稍后重试。",
-      "invalid_auth": "Rhymax 云端未通过身份验证，请重试。",
-      "cannot_connect": "无法连接 Rhymax 云端，请稍后重试。",
+      "invalid_auth": "RHYMAX 云端未通过身份验证，请重试。",
+      "cannot_connect": "无法连接 RHYMAX 云端，请稍后重试。",
       "authorize_url_timeout": "准备登录页面超时。",
       "missing_configuration": "Rhymax Mower 配置不正确，请检查 Home Assistant 的 My 集成配置。",
       "missing_credentials": "账号绑定配置不可用，请更新 Rhymax Mower 后重试。",
       "no_url_available": "无可用地址。请参考[帮助文档]({docs_url})。",
-      "oauth_error": "Rhymax 云端返回了无效的登录数据。",
-      "oauth_failed": "无法完成与 Rhymax 云端的登录，请稍后重试。",
+      "oauth_error": "RHYMAX 云端返回了无效的登录数据。",
+      "oauth_failed": "无法完成与 RHYMAX 云端的登录，请稍后重试。",
       "oauth_implementation_unavailable": "登录服务暂时不可用，请稍后重试。",
-      "oauth_timeout": "完成 Rhymax 云端登录超时。",
-      "oauth_unauthorized": "Rhymax 云端未接受此次登录。",
+      "oauth_timeout": "完成 RHYMAX 云端登录超时。",
+      "oauth_unauthorized": "RHYMAX 云端未接受此次登录。",
       "user_rejected_authorize": "未完成账号绑定：{error}"
     }
   },
@@ -48,25 +48,25 @@
   },
   "exceptions": {
     "auth_failed": {
-      "message": "RoboUP 账号授权已过期，请重新登录以继续使用。"
+      "message": "RHYMAX 账号授权已过期，请重新登录以继续使用。"
     },
     "credentials_missing": {
-      "message": "RoboUP 账号授权需要更新，请重新登录以继续使用。"
+      "message": "RHYMAX 账号授权需要更新，请重新登录以继续使用。"
     },
     "relink_required": {
-      "message": "此条目未绑定 RoboUP 账号，请删除后重新添加 Rhymax Mower。"
+      "message": "此条目未绑定 RHYMAX 账号，请删除后重新添加 Rhymax Mower。"
     },
     "linking_unavailable": {
       "message": "Home Assistant 接入暂未开启，请稍后重试。"
     },
     "update_failed": {
-      "message": "无法从 Rhymax 云端获取割草机状态：{error}"
+      "message": "无法从 RHYMAX 云端获取割草机状态：{error}"
     },
     "cannot_connect": {
-      "message": "无法连接 Rhymax 云端，请稍后重试。"
+      "message": "无法连接 RHYMAX 云端，请稍后重试。"
     },
     "command_failed": {
-      "message": "Rhymax 云端无法发送指令，请稍后重试。"
+      "message": "RHYMAX 云端无法发送指令，请稍后重试。"
     },
     "command_rejected": {
       "message": "割草机无法执行该指令。"
@@ -81,7 +81,7 @@
       "message": "割草机响应超时，指令可能已执行，请先检查状态再决定是否重试。"
     },
     "mower_not_found": {
-      "message": "此割草机已不在您的 RoboUP 账号下。"
+      "message": "此割草机已不在您的 RHYMAX 账号下。"
     },
     "region_restricted": {
       "message": "该设备当前所在地区不支持云端控制。"

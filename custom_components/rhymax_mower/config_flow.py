@@ -27,7 +27,7 @@ _LOGGER = logging.getLogger(__name__)
 class OAuth2FlowHandler(
     config_entry_oauth2_flow.AbstractOAuth2FlowHandler, domain=DOMAIN
 ):
-    """Link a RoboUP account through Rhymax cloud."""
+    """Link a RHYMAX account through RHYMAX Cloud."""
 
     DOMAIN = DOMAIN
     VERSION = 1
@@ -101,7 +101,7 @@ class OAuth2FlowHandler(
                 self._get_reauth_entry(), data=data
             )
         self._abort_if_unique_id_configured()
-        return self.async_create_entry(title="RoboUP account", data=data)
+        return self.async_create_entry(title="RHYMAX account", data=data)
 
     async def async_step_reauth(
         self, entry_data: Mapping[str, Any]
@@ -112,7 +112,7 @@ class OAuth2FlowHandler(
     async def async_step_reauth_confirm(
         self, user_input: dict[str, Any] | None = None
     ) -> ConfigFlowResult:
-        """Ask the user to sign in to the RoboUP account again."""
+        """Ask the user to sign in to the RHYMAX account again."""
         if user_input is None:
             return self.async_show_form(step_id="reauth_confirm")
         return await self.async_step_user()

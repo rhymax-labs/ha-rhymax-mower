@@ -107,9 +107,28 @@ async def test_full_pkce_exchange_without_client_secret(
         await hass.async_block_till_done()
 
     assert result3["type"] is FlowResultType.CREATE_ENTRY
+    assert result3["title"] == "RHYMAX account"
     assert result3["data"]["auth_implementation"] == DOMAIN
     assert len(aioclient_mock.mock_calls) == 1
     token_call_data = aioclient_mock.mock_calls[0][2]
     assert token_call_data["client_id"] == OAUTH2_CLIENT_ID
     assert "client_secret" not in token_call_data
     assert len(token_call_data["code_verifier"]) >= 43
+
+
+def test_no_roboup_in_user_facing_strings_and_readme() -> None:
+    """User-facing strings, translations, and README use RHYMAX rather than RoboUP."""
+    from pathlib import Path
+
+    root = Path(__file__).resolve().parent.parent
+    comp = root / "custom_components" / "rhymax_mower"
+    for path in (
+        comp / "strings.json",
+        comp / "translations" / "en.json",
+        comp / "translations" / "zh-Hans.json",
+        root / "README.md",
+    ):
+        text = path.read_text(encoding="utf-8")
+        assert "RHYMAX" in text, f"{path} should reference RHYMAX"
+        cleaned = text.replace("iroboup.com", "")
+        assert "roboup" not in cleaned.lower(), f"{path} still mentions RoboUP"
