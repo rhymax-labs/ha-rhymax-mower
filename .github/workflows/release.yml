@@ -1,0 +1,46 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify manifest version matches tag
+        run: |
+          TAG="${GITHUB_REF_NAME}"
+          EXPECTED="${TAG#v}"
+          ACTUAL="$(jq -r '.version' custom_components/rhymax_mower/manifest.json)"
+          if [ "$ACTUAL" != "$EXPECTED" ]; then
+            echo "manifest.json version ($ACTUAL) does not match tag ($TAG)" >&2
+            exit 1
+          fi
+      - name: Publish GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="${GITHUB_REF_NAME}"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Release $TAG already exists; skipping."
+            exit 0
+          fi
+          if [ "$TAG" = "v0.3.0" ]; then
+            NOTES="$(printf '%s\n' \
+              "## What's new" \
+              '- Public OAuth2 + PKCE (`S256`) account linking — no Home Assistant Application Credentials or client secret required' \
+              '- Chinese (`zh-Hans`) UI translations and one-click My Home Assistant install/setup links' \
+              '- Updated README with HACS setup and optional Advanced Local MQTT guide' \
+              '' \
+              '## Install' \
+              'HACS → custom repository `rhymax-labs/ha-rhymax-mower`, or update if already installed.')"
+            gh release create "$TAG" --title "$TAG" --notes "$NOTES" --latest
+          else
+            gh release create "$TAG" --title "$TAG" --generate-notes --latest
+          fi
